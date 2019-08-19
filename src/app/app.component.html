@@ -1,21 +1,54 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container jumbotron">
+  <h2 id="title">
+    <p class="animated pulse delay-1s">TasksFarm</p>
+  </h2>
+  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addtask">Add task</button>
+  <hr>
+  <div *ngFor="let task of data" class="row">
+    <div class="col-5" (click)="showtaskDetails(task)">
+      <strong class="badge badge-warning" style="padding:5px;">{{task.task}}</strong>
+    </div>
+    <div class="col-5" (click)="showtaskDetails(task)">
+      {{task.importance}}
+    </div>
+    <div class="col-2">
+      <button (click)="deletetask(task)" class="btn btn-sm btn-danger">x</button>
+    </div>
+    <hr>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
 <router-outlet></router-outlet>
+
+<div class="modal fade" id="addtask">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add task</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body addTaskModal">
+        <form #addtaskForm="ngForm" ngSubmit="addTask(addtaskForm.value)" novalidate>
+          <div class="form-group">
+            <label for="task">Task:</label>
+            <input type="text" class="form-control" name="task" id="task" [(ngModel)]="task">
+          </div>
+          <div class="form-group">
+            <label for="imp">Importance(1-10):</label>
+            <input type="number" class="form-control" name="importance" id="imp" [(ngModel)]="importance">
+          </div>
+          <button class="btn btn-sm btn-success" data-dismiss="modal" (click)="addTask(addtaskForm.value)">Add</button>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+.container{
+    margin: 10px;
+}
+
+body{
+    background-color:rgb(24, 181, 94);
+    color: white;
+}
+
+.addTaskModal{
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px solid rgb(36, 35, 35);
+}
+
+#title{
+    background-color: rgb(5, 255, 34);
+    padding: 10px;
+}
